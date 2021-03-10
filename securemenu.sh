@@ -85,7 +85,6 @@ ColorWhite(){
 menu(){
 #get_current_config
 clear
-menu_header
 echo -ne "
 $(ColorOrange '-------------Security Menu-----------')
 $(ColorOrange '-')$(ColorGreen ' 1)') Security Checks
