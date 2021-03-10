@@ -2,20 +2,13 @@
 LANGUAGE=EN
 source lang/$LANGUAGE.conf
 
-#echo "$(tput setaf 0)$(tput setab 7)"$enHeaderMenuWelcome"$(tput sgr 0)"
 
-#$(ColorOrange '-------------Check for Script Updatesi '"$enHeaderMenuWelcome"'-----------')
 # Sanity Check
 #    #######################################################
-echo "$(tput setaf 4)-------------------------------------------------------"
-if [ $LANGUAGE == "EN" ]; then
-echo "$(tput setaf 0)$(tput setab 7)Since we need to run the menu with elevated privileges$(tput sgr 0)"
-echo "$(tput setaf 0)$(tput setab 7)Please enter your password now.$(tput sgr 0)"
-    else
-echo "$(tput setaf 0)$(tput setab 7)"$rootCheck"$(tput sgr 0)"
-echo "$(tput setaf 0)$(tput setab 7)"$rootCheck1"$(tput sgr 0)"    
-fi
-echo "$(tput setaf 4)-------------------------------------------------------"
+echo "$(tput setaf 4)"$DRAW60""
+echo "$(tput setaf 0)$(tput setab 7)"$CHECKSUDO"$(tput sgr 0)"
+echo "$(tput setaf 0)$(tput setab 7)"CHECKSUDO1"$(tput sgr 0)"    
+echo "$(tput setaf 4)"$DRAW60""
 #    ###################################################### 
 [[ "$EUID" -eq 0 ]] || exec sudo "$0" "$@"
 
@@ -103,7 +96,7 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream})
 
 function script_check_update() {
-#Look I know this is not pretty like Loki's face but it works!
+#Look for updates from repo tag
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
       echo "$S
@@ -114,8 +107,6 @@ function script_check_update() {
         git pull --force
 	echo " Updating"
       	sleep 1
-	#remove for testing... pathing not required?
-       #cd /opt/Dedicated_Valheim_server_Script/
 	chmod +x menu.sh
 	sleep 1
 	chmod +x advancemenu.sh
@@ -139,53 +130,53 @@ function valheim_server_install() {
     clear
     echo ""
     echo -ne "
-$(ColorOrange '-----------------Install Valheim Server------------------')
-$(ColorRed '------------------------------------------------------------')"
+$(ColorOrange ''"$INSTALLVALSERVER"'')
+$(ColorRed ''"$DRAW60"'')"
 echo ""
-tput setaf 2; echo "You are about to INSTALL the Valheim Server" ; tput setaf 9; 
-tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9; 
+tput setaf 2; echo "$CONFIRMVALINSTALL" ; tput setaf 9; 
+tput setaf 2; echo "$CONFIRMVALINSTALL" ; tput setaf 9; 
 echo -ne "
-$(ColorRed '------------------------------------------------------------')"
+$(ColorRed ''"$DRAW60"'')"
 echo ""
- read -p "Please confirm:" confirmStartInstall
+ read -p "$PLEASECONFIRM" confirmStartInstall
 #if y, then continue, else cancel
         if [ "$confirmStartInstall" == "y" ]; then
     echo ""
 
 #check for updates and upgrade the system auto yes
-    tput setaf 1; echo "Checking for upgrades" ; tput setaf 9;
+    tput setaf 1; echo "$CHECK_FOR_UPDATES" ; tput setaf 9;
     apt update && apt upgrade -y
-    tput setaf 2; echo "Done" ; tput setaf 9;
+    tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
     sleep 1
     
 #check for updates and upgrade the system auto yes WTF is curl not installed by default... come on man!
-    tput setaf 1; echo "Install Git, Locate, Curl, Unzip and Net-Tools" ; tput setaf 9;
+    tput setaf 1; echo "$INSTALL_ADDITIONAL_FILES" ; tput setaf 9;
     apt install git mlocate net-tools unzip curl -y
-    tput setaf 2; echo "Done" ; tput setaf 9;
+    tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
     sleep 1
     
 #install software-properties-common for add-apt-repository command below
-    tput setaf 1; echo "Installing software-properties-common package" ; tput setaf 9;
+    tput setaf 1; echo "$INSTALL_SPCP" ; tput setaf 9;
     apt install software-properties-common
-    tput setaf 2; echo "Done" ; tput setaf 9;
+    tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
     sleep 1
 
 #add multiverse repo
-    tput setaf 1; echo "Adding multiverse REPO" ; tput setaf 9;
+    tput setaf 1; echo "$ADD_MULTIVERSE" ; tput setaf 9;
     add-apt-repository -y multiverse
-    tput setaf 2; echo "Done" ; tput setaf 9;
+    tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
     sleep 1
 
 #add i386 architecture
-    tput setaf 1; echo "Adding i386 architecture" ; tput setaf 9;
+    tput setaf 1; echo "$ADD_I386" ; tput setaf 9;
     dpkg --add-architecture i386
-    tput setaf 2; echo "Done" ; tput setaf 9;
+    tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
     sleep 1
 
 #update system again
-    tput setaf 1; echo "Checking and updating system again" ; tput setaf 9;
+    tput setaf 1; echo "$CHECK_FOR_UPDATES_AGAIN" ; tput setaf 9;
     apt update
-    tput setaf 2; echo "Done" ; tput setaf 9;
+    tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
     sleep 1
 
 # Linux Steam Local Account Password input
