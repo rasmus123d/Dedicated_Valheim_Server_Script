@@ -115,7 +115,7 @@ function script_check_update() {
         # Now exit this old instance
         exit 1
     }
-   deepl translate -t '$setLang' "Oh for Loki sakes! No updates to be had... back to choring! "
+   echo "Oh for Loki sakes! No updates to be had... back to choring! "
 }
 
 
@@ -131,7 +131,7 @@ function valheim_server_install() {
 $(ColorOrange '-----------------Install Valheim Server------------------')
 $(ColorRed '------------------------------------------------------------')"
 echo ""
-   deepl translate -t tput setaf 2; echo "You are about to INSTALL the Valheim Server" ; tput setaf 9; 
+tput setaf 2; echo "You are about to INSTALL the Valheim Server" ; tput setaf 9; 
 tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9; 
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
