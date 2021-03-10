@@ -131,7 +131,7 @@ function valheim_server_install() {
 $(ColorOrange '-----------------Install Valheim Server------------------')
 $(ColorRed '------------------------------------------------------------')"
 echo ""
-tput setaf 2; echo "You are about to INSTALL the Valheim Server" ; tput setaf 9; 
+   deepl translate -t tput setaf 2; echo "You are about to INSTALL the Valheim Server" ; tput setaf 9; 
 tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9; 
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
