@@ -188,10 +188,10 @@ echo ""
       tput setaf 2; echo "----------------NONROOT STEAM ACCOUNT PASSWORD--------------" ; tput setaf 9;
       tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
       tput setaf 1; echo "Password must be 6 Characters or more" ; tput setaf 9;
-      tput setaf 1 ;echo "At least one number, one uppercase letter and one lowercase letter" ; tput setaf 9;
+      tput setaf 1; echo "At least one number, one uppercase letter and one lowercase letter" ; tput setaf 9;
       tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-      tput setaf 2;  echo "Good Example: Viking12" ; tput setaf 9;
-      tput setaf 1;  echo "Bad Example: Vik!" ; tput setaf 9;
+      tput setaf 2; echo "Good Example: Viking12" ; tput setaf 9;
+      tput setaf 1; echo "Bad Example: Vik!" ; tput setaf 9;
       tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
       echo ""
         read -p "Please give steam a password: " userpassword
