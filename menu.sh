@@ -95,7 +95,7 @@ function script_check_update() {
 #Look I know this is not pretty like Loki's face but it works!
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
-      echo "BY THORS HAMMER take a peek inside Valhalla!!"
+      echo ${enScriptUpdateThor}
       sleep 1
         git pull --force
 	git stash
