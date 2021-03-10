@@ -25,7 +25,7 @@ worldpath=/home/steam/.config/unity3d/IronGate/Valheim/worlds
 #Backup Directory ( Default )
 backupPath=/home/steam/backups
 ###############################################################
-
+setLang="FR"
 # Set Menu Version for menu display
 mversion="2.0.2-Lofn"
 
@@ -115,7 +115,7 @@ function script_check_update() {
         # Now exit this old instance
         exit 1
     }
-        echo "Oh for Loki sakes! No updates to be had... back to choring! "
+   deepl translate -t '$setLang' "Oh for Loki sakes! No updates to be had... back to choring! "
 }
 
 
