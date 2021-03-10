@@ -2,11 +2,19 @@
 LANGUAGE=EN
 source lang/$LANGUAGE.conf
 
+#echo "$(tput setaf 0)$(tput setab 7)"$enHeaderMenuWelcome"$(tput sgr 0)"
+
+#$(ColorOrange '-------------Check for Script Updatesi '"$enHeaderMenuWelcome"'-----------')
 # Sanity Check
 #    #######################################################
 echo "$(tput setaf 4)-------------------------------------------------------"
+if [ $LANGUAGE == "EN" ]; then
 echo "$(tput setaf 0)$(tput setab 7)Since we need to run the menu with elevated privileges$(tput sgr 0)"
 echo "$(tput setaf 0)$(tput setab 7)Please enter your password now.$(tput sgr 0)"
+    else
+echo "$(tput setaf 0)$(tput setab 7)"$rootCheck"$(tput sgr 0)"
+echo "$(tput setaf 0)$(tput setab 7)"$rootCheck1"$(tput sgr 0)"    
+fi
 echo "$(tput setaf 4)-------------------------------------------------------"
 #    ###################################################### 
 [[ "$EUID" -eq 0 ]] || exec sudo "$0" "$@"
@@ -98,7 +106,7 @@ function script_check_update() {
 #Look I know this is not pretty like Loki's face but it works!
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
-      echo ${enScriptUpdateThor}
+      echo "$S
       sleep 1
         git pull --force
 	git stash
@@ -121,9 +129,6 @@ function script_check_update() {
 }
 
 
-#echo "$(tput setaf 0)$(tput setab 7)"$enHeaderMenuWelcome"$(tput sgr 0)"
-
-#$(ColorOrange '-------------Check for Script Updatesi '"$enHeaderMenuWelcome"'-----------')
 
 
 ########################################################################
