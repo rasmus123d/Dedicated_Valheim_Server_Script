@@ -1224,7 +1224,7 @@ echo -ne "
 $(ColorOrange '╔═══════════════════════════════════════════════╗')
 $(ColorOrange '║~~~~~~~~~~~~~~~~~~-Njord Menu-~~~~~~~~~~~~~~~~~║')
 $(ColorOrange '╠═══════════════════════════════════════════════╝')
-$(ColorOrange '║ Welcome Viking! Do not forget about your bees')
+$(ColorOrange '║ Welcome Viking! Do not forget about your bees') ${enHeaderMenuWelcome}
 $(ColorOrange '║ Visit our discord: https://discord.gg/ejgQUfc')
 $(ColorOrange '║ Beware Loki hides within this script')
 $(ColorOrange '║') 
