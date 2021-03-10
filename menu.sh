@@ -1,4 +1,5 @@
 #!/bin/bash
+source /lang/en.conf
 # Sanity Check
 #    #######################################################
 echo "$(tput setaf 4)-------------------------------------------------------"
@@ -7,7 +8,7 @@ echo "$(tput setaf 0)$(tput setab 7)Please enter your password now.$(tput sgr 0)
 echo "$(tput setaf 4)-------------------------------------------------------"
 #    ###################################################### 
 [[ "$EUID" -eq 0 ]] || exec sudo "$0" "$@"
-source /lang/en.config
+
 
 # MAIN BRANCH MENU
 # If Frankenstein was a bash script
