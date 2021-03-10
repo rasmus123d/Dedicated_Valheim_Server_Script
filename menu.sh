@@ -1,5 +1,7 @@
 #!/bin/bash
-source /lang/en.conf
+LANGUAGE=EN
+source lang/$LANGUAGE.conf
+
 # Sanity Check
 #    #######################################################
 echo "$(tput setaf 4)-------------------------------------------------------"
@@ -25,7 +27,7 @@ worldpath=/home/steam/.config/unity3d/IronGate/Valheim/worlds
 #Backup Directory ( Default )
 backupPath=/home/steam/backups
 ###############################################################
-setLang="FR"
+
 # Set Menu Version for menu display
 mversion="2.0.2-Lofn"
 
@@ -118,6 +120,10 @@ function script_check_update() {
    echo "Oh for Loki sakes! No updates to be had... back to choring! "
 }
 
+
+#echo "$(tput setaf 0)$(tput setab 7)"$enHeaderMenuWelcome"$(tput sgr 0)"
+
+#$(ColorOrange '-------------Check for Script Updatesi '"$enHeaderMenuWelcome"'-----------')
 
 
 ########################################################################
