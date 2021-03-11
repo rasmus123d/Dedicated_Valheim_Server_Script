@@ -503,41 +503,41 @@ function restore_world_data() {
     bIndex=$((bIndex+1))
     done
 #promt user for index
-tput setaf 2; echo "Select Backup File you wish to restore" ; tput setaf 9;
-tput setaf 2; echo "To CANCEL select any file. Next are you can confirm or back out" ; tput setaf 9;
-    read -p "" selectedIndex
+tput setaf 2; echo "$RESTORE_WORLD_DATA_HEADER" ; tput setaf 9;
+tput setaf 2; echo "$RESTORE_WORLD_DATA_CONFIRM" ; tput setaf 9;
+    read -p "$RESTORE_WORLD_DATA_SELECTION" selectedIndex
 #show confirmation message
 restorefile=$(basename "${backups[$selectedIndex-1]}")
 echo -ne "
 $(ColorRed '------------------------------------------------------------')
-$(ColorGreen 'Restore '${restorefile}' ?')
-$(ColorGreen 'Are you sure you want to do this? ')
-$(ColorOrange 'Remember to match world name with '${valheimInstallPath}'/start_valheim.sh')
-$(ColorOrange 'The param for -world "worldname" much match restore file worldname.db and worldname.fwl')
-$(ColorGreen 'Press y (for yes) or n (for no)') "
+$(ColorGreen ' '"$RESTORE_WORLD_DATA_SHOW_FILE"' '${restorefile}' ?')
+$(ColorGreen ' '"$RESTORE_WORLD_DATA_ARE_YOU_SURE"' ')
+$(ColorOrange ' '"$RESTORE_WORLD_DATA_VALIDATE_DATA_WITH_CONFIG"' '${valheimInstallPath}'/start_valheim.sh')
+$(ColorOrange ' '"$RESTORE_WORLD_DATA_INFO"' ')
+$(ColorGreen ' '"$RESTORE_WORLD_DATA_CONFIRM_1"' ') "
 #read user input confirmation
     read -p "" confirmBackupRestore
 #if y, then continue, else cancel
         if [ "$confirmBackupRestore" == "y" ]; then
  #stop valheim server
-        tput setaf 1; echo "Stopping Valheim Server" ; tput setaf 9;
+        tput setaf 1; echo "$RESTORE_WORLD_DATA_STOP_VALHEIM_SERVICE" ; tput setaf 9;
         systemctl stop valheimserver.service
-        tput setaf 2; echo "Valheim Services successfully Stopped" ; tput setaf 9;
+        tput setaf 2; echo "$RESTORE_WORLD_DATA_STOP_VALHEIM_SERVICE_1" ; tput setaf 9;
  #give it a few
         sleep 5
  #copy backup to worlds folder
-        tput setaf 2; echo "Copying ${backups[$selectedIndex-1]} to ${worldpath}/" ; tput setaf 9;
+        tput setaf 2; echo "$RESTORE_WORLD_DATA_COPYING ${backups[$selectedIndex-1]} to ${worldpath}/" ; tput setaf 9;
         cp ${backups[$selectedIndex-1]} ${worldpath}/
  #untar
-        tput setaf 2; echo "Unpacking ${worldpath}/${restorefile}" ; tput setaf 9;
+        tput setaf 2; echo "$RESTORE_WORLD_DATA_UNPACKING ${worldpath}/${restorefile}" ; tput setaf 9;
         tar xzf ${worldpath}/${restorefile} --strip-components=7 --directory ${worldpath}/  
 	chown -Rf steam:steam ${worldpath}
 	rm  ${worldpath}/*.tgz
-        tput setaf 2; echo "Starting Valheim Services" ; tput setaf 9;
-        tput setaf 2; echo "This better work Loki!" ; tput setaf 9;
+        tput setaf 2; echo "$RESTORE_WORLD_DATA_STARTING_VALHEIM_SERVICES" ; tput setaf 9;
+        tput setaf 2; echo "$RESTORE_WORLD_DATA_CUSS_LOKI" ; tput setaf 9;
         systemctl start valheimserver.service
 else
-        tput setaf 2; echo "Canceling restore process because Loki sucks" ; tput setaf 9;
+        tput setaf 2; echo "$RESTORE_WORLD_DATA_CANCEL_CUSS_LOKI" ; tput setaf 9;
 fi
 }
 
