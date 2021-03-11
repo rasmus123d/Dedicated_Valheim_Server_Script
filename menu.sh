@@ -278,7 +278,7 @@ echo ""
       read -p "$PUBLIC_ENABLED_DISABLE_INPUT" publicList
     tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-echo "$CAT_INSTALL_CREDS_TO_FILE" >> /home/steam/serverSetup.txt
+echo "$CREDS_CAT_INSTALL_CREDS_TO_FILE" >> /home/steam/serverSetup.txt
 
 #not sure if above will work... need to test
 #cat >> /home/steam/serverSetup.txt <<EOF
@@ -297,54 +297,53 @@ echo "$CAT_INSTALL_CREDS_TO_FILE" >> /home/steam/serverSetup.txt
 
 chown steam:steam /home/steam/serverSetup.txt
 clear
-echo "Here is the information you entered"
-echo "This information is saved in the valheim_server.sh file"
-echo "This information is saved in /home/steam/serverSetup.txt for referance later, if you forget"
-tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-tput setaf 2; echo "nonroot steam password:  $userpassword " ; tput setaf 9;
-tput setaf 2; echo "Public Server Name:      $displayname " ; tput setaf 9;
-tput setaf 2; echo "Local World Name:        $worldname " ; tput setaf 9;
-tput setaf 2; echo "Valheim Server Password: $password " ; tput setaf 9; 
-tput setaf 2; echo "Show Public Server: $publicList " ; tput setaf 9; 
-tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+
+echo "$CREDS_DISPLAY_CREDS_PRINT_OUT_HEADER"
+tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+tput setaf 2; echo "$CREDS_DISPLAY_CREDS_PRINT_OUT_STEAM_PASSWORD $userpassword " ; tput setaf 9;
+tput setaf 2; echo "$CREDS_DISPLAY_CREDS_PRINT_OUT_SERVER_NAME $displayname " ; tput setaf 9;
+tput setaf 2; echo "$CREDS_DISPLAY_CREDS_PRINT_OUT_WORLD_NAME $worldname " ; tput setaf 9;
+tput setaf 2; echo "$CREDS_DISPLAY_CREDS_PRINT_OUT_ACCESS_PASS $password " ; tput setaf 9; 
+tput setaf 2; echo "$CREDS_DISPLAY_CREDS_PRINT_OUT_SHOW_PUBLIC $publicList " ; tput setaf 9; 
+tput setaf 2; echo "$DRAW60" ; tput setaf 9;
 echo ""
 sleep 5
 
 #install steamcmd and libsd12-2
-tput setaf 1; echo "Installing steamcmd and libsdl2" ; tput setaf 9;
+tput setaf 1; echo "$INSTALL_STEAMCMD_LIBSD12" ; tput setaf 9;
 echo steam steam/question select "I AGREE" | sudo debconf-set-selections
 echo steam steam/license note '' | sudo debconf-set-selections
 apt install steamcmd libsdl2-2.0-0 libsdl2-2.0-0:i386 -y
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 #EDIT HERE #1
 #build account to run Valheim
-tput setaf 1; echo "Building steam account NONROOT" ; tput setaf 9;
+tput setaf 1; echo "$INSTALL_BUILD_NON_ROOT_STEAM_ACCOUNT" ; tput setaf 9;
 sleep 1
 useradd --create-home --shell /bin/bash --password $userpassword steam
 cp /etc/skel/.bashrc /home/steam/.bashrc
 cp /etc/skel/.profile /home/steam/.profile
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 #build symbolic link for steamcmd
-tput setaf 1; echo "Building symbolic link for steamcmd" ; tput setaf 9;
+tput setaf 1; echo "$INSTALL_BUILD_SYM_LINK_STEAMCMD" ; tput setaf 9;
 ln -s /usr/games/steamcmd /home/steam/steamcmd
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 #chown steam user to steam
-tput setaf 1; echo "Setting steam permissions" ; tput setaf 9;
+tput setaf 1; echo "$INSTALL_BUILD_SET_STEAM_PERM" ; tput setaf 9;
 chown steam:steam -Rf /home/steam/*
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 #Download Valheim from steam
-tput setaf 1; echo "Downloading and installing Valheim from Steam" ; tput setaf 9;
+tput setaf 1; echo "$INSTALL_BUILD_DOWNLOAD_INSTALL_STEAM_VALHEIM" ; tput setaf 9;
 sleep 1
 /home/steam/steamcmd +login anonymous +force_install_dir ${valheimInstallPath} +app_update 896660 validate +exit
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 #build config for start_valheim.sh
-tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9;  
-tput setaf 1; echo "Building Valheim start_valheim server configuration" ; tput setaf 9;
+tput setaf 1; echo "$INSTALL_BUILD_DELETE_OLD_CONFIGS" ; tput setaf 9;  
+tput setaf 1; echo "$INSTALL_BUILD_DELETE_OLD_CONFIGS_1" ; tput setaf 9;
 [ -e ${valheimInstallPath}/start_valheim.sh ] && rm ${valheimInstallPath}/start_valheim.sh
 sleep 1
 cat >> ${valheimInstallPath}/start_valheim.sh <<EOF
@@ -357,22 +356,19 @@ export SteamAppId=892970
 ./valheim_server.x86_64 -name "${displayname}" -port "2456" -nographics -batchmode -world "${worldname}" -password "${password}" -public "${publicList}"
 export LD_LIBRARY_PATH=\$templdpath
 EOF
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 #delete old check log script, not required any longer.
-tput setaf 1; echo "Deleting old check log script if exist" ; tput setaf 9; 
+tput setaf 1; echo "$INSTALL_BUILD_DELETE_OLD_SCRIPT" ; tput setaf 9; 
 [ -e /home/steam/check_log.sh ] && rm /home/steam/check_log.sh
 #set execute permissions
-tput setaf 1; echo "Setting execute permissions on start_valheim.sh" ; tput setaf 9;
+tput setaf 1; echo "$INSTALL_BUILD_SET_PERM_ON_START_VALHEIM" ; tput setaf 9;
 chmod +x ${valheimInstallPath}/start_valheim.sh
-tput setaf 2; echo "Done" ; tput setaf 9;
-tput setaf 1; echo "Setting execute permissions on check_log.sh" ; tput setaf 9; 
-chmod +x /home/steam/check_log.sh
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 #build systemctl configurations for execution of processes for Valheim Server
-tput setaf 1; echo "Deleting old configuration if file exist" ; tput setaf 9; 
-tput setaf 1; echo "Building systemctl instructions for Valheim" ; tput setaf 9; 
+tput setaf 1; echo "$INSTALL_BUILD_DEL_OLD_SERVICE_CONFIG" ; tput setaf 9; 
+tput setaf 1; echo "$INSTALL_BUILD_DEL_OLD_SERVICE_CONFIG_1" ; tput setaf 9; 
 # remove old Valheim Server Service
 [ -e /etc/systemd/system/valheimserver.service ] && rm /etc/systemd/system/valheimserver.service
 # remove past Valheim Server Service
@@ -402,42 +398,35 @@ LimitNOFILE=100000
 [Install]
 WantedBy=multi-user.target
 EOF
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 #chown steam user permissions to all of user steam dir location
-tput setaf 1; echo "Setting steam account permissions to /home/steam/*" ; tput setaf 9; 
+tput setaf 1; echo "$INSTALL_BUILD_SET_STEAM_PERMS" ; tput setaf 9; 
 chown steam:steam -Rf /home/steam/*
-tput setaf 2; echo "Done" ; tput setaf 9;
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9;
 sleep 1
 # Reload daemons
-tput setaf 1; echo "Reloading daemons and spawning Necks" ; tput setaf 9; 
+tput setaf 1; echo "$INSTALL_BUILD_RELOAD_DAEMONS" ; tput setaf 9; 
 systemctl daemon-reload
-tput setaf 2; echo "Done" ; tput setaf 9; 
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9; 
 sleep 1
 # Start server
-tput setaf 1; echo "By Thors Hammer we are Starting the Valheim Server" ; tput setaf 9; 
+tput setaf 1; echo "$INSTALL_BUILD_START_VALHEIM_SERVICE" ; tput setaf 9; 
 systemctl start valheimserver
-tput setaf 2; echo "Done" ; tput setaf 9; 
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9; 
 sleep 1
 # Enable server on restarts
-tput setaf 1; echo "Enabling Valheim Server on start or after reboots" ; tput setaf 9; 
+tput setaf 1; echo "$INSTALL_BUILD_ENABLE_VALHEIM_SERVICE" ; tput setaf 9; 
 systemctl enable valheimserver
-tput setaf 2; echo "Done" ; tput setaf 9; 
+tput setaf 2; echo "$ECHO_DONE" ; tput setaf 9; 
 sleep 2
 clear
-tput setaf 2; echo "Check server status by typing systemctl status valheimserver.service"
-tput setaf 2; echo "Thank you for using the script."
-tput setaf 2; echo "AND A HUGE THANKS TO github: @Lachlanmac, @JamieeLee, @RedKrieg, @bherbruck "
-tput setaf 2; echo "@xaviablaza, @joaoanes, @amasover, @madmozg, @nicolas-martin, @devdavi and others!"
-tput setaf 2; echo "If your name is missing! Let me know!"
-tput setaf 2; echo "-ZeroBandwidth"
-tput setaf 2; echo "GLHF"
-tput setaf 9;
+tput setaf 2; echo "$INSTALL_BUILD_FINISH_THANK_YOU" ; tput setaf 9;
 echo ""
   
     echo ""    
     else
-        echo "Canceling the INSTALL of Valheim Server Service - because Loki sucks"
+        echo "$INSTALL_BUILD_CANCEL"
 fi
 }
 ########################################################################
