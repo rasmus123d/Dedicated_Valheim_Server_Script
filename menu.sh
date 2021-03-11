@@ -184,12 +184,12 @@ echo ""
     clear
     echo "$START_INSTALL_1_PARA"
     while true; do
-      tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-      tput setaf 2; echo "----------------NONROOT STEAM ACCOUNT PASSWORD--------------" ; tput setaf 9;
-      tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-      tput setaf 1; echo "Password must be 6 Characters or more" ; tput setaf 9;
-      tput setaf 1; echo "At least one number, one uppercase letter and one lowercase letter" ; tput setaf 9;
-      tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+      tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+      tput setaf 2; echo "$NON_ROOT_STEAM_PASSWORD" ; tput setaf 9;
+      tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+      tput setaf 1; echo "$PASS_MUST_BE" ; tput setaf 9;
+      tput setaf 1; echo "$PASS_MUST_BE_1" ; tput setaf 9;
+      tput setaf 2; echo "$DRAW60" ; tput setaf 9;
       tput setaf 2; echo "Good Example: Viking12" ; tput setaf 9;
       tput setaf 1; echo "Bad Example: Vik!" ; tput setaf 9;
       tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
