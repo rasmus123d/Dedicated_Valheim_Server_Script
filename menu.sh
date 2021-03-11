@@ -436,49 +436,49 @@ function backup_world_data() {
     echo ""
     echo ""
     #read user input confirmation
-      tput setaf 1; echo "This will stop and start Valheim Services." ; tput setaf 9;
-      tput setaf 1; echo "Are you okay with this? (y=Yes, n=No)" ; tput setaf 9;
-         read -p "Press y or n:" confirmBackup
+      tput setaf 1; echo "$BACKUP_WORLD_DATA_HEADER" ; tput setaf 9;
+      tput setaf 1; echo "$BACKUP_WORLD_INFO_CONFIRM" ; tput setaf 9;
+         read -p "$BACKUP_WORLD_INPUT_CONFIRM_Y_N" confirmBackup
          #if y, then continue, else cancel
          if [ "$confirmBackup" == "y" ]; then
          ## Get the current date as variable.
          TODAY="$(date +%Y-%m-%d-%T)"
-	 tput setaf 5; echo "Checking to see if backup directory is created" ; tput setaf 9;
-	 tput setaf 5; echo "If not, one will be created" ; tput setaf 9;
+	 tput setaf 5; echo "$BACKUP_WORLD_CHECK_DIRECTORY" ; tput setaf 9;
+	 tput setaf 5; echo "$BACKUP_WORLD_CHECK_DIRECTORY_1" ; tput setaf 9;
 	 dldir=$backupPath
 	 [ ! -d "$dldir" ] && mkdir -p "$dldir"
          sleep 1
          ## Clean up files older than 2 weeks. Create a new backup.
-	 tput setaf 1; echo "Cleaning up old backup files. Older than 2 weeks" ; tput setaf 9;
+	 tput setaf 1; echo "$BACKUP_WORLD_CONDUCT_CLEANING" ; tput setaf 9;
          find $backupPath/* -mtime +14 -type f -delete
-	 tput setaf 2; echo "Cleaned up better than Loki" ; tput setaf 9;
+	 tput setaf 2; echo "BACKUP_WORLD_CONDUCT_CLEANING_LOKI" ; tput setaf 9;
          sleep 1
          ## Tar Section. Create a backup file, with the current date in its name.
          ## Add -h to convert the symbolic links into a regular files.
          ## Backup some system files, also the entire `/home` directory, etc.
          ##--exclude some directories, for example the the browser's cache, `.bash_history`, etc.
 	  #stop valheim server
-         tput setaf 1; echo "Stopping Valheim Server for clean backups" ; tput setaf 9;
+         tput setaf 1; echo "$BACKUP_WORLD_STOPPING_SERVICES" ; tput setaf 9;
          systemctl stop valheimserver.service
-         tput setaf 1; echo "Stopped" ; tput setaf 9;
-	 tput setaf 2; echo "Valheim Services successfully Stopped" ; tput setaf 9;
-	 tput setaf 2; echo "Waiting for 10 seconds for Valheim to finish off loading RAM to world data files" ; tput setaf 9;
+         tput setaf 1; echo "$BACKUP_WORLD_STOP_INFO" ; tput setaf 9;
+	 tput setaf 2; echo "$BACKUP_WORLD_STOP_INFO_1" ; tput setaf 9;
+	 tput setaf 2; echo "$BACKUP_WORLD_STOP_WAIT_10_SEC" ; tput setaf 9;
          #give it a few
          sleep 10
-	 tput setaf 1; echo "Making tar file of world data" ; tput setaf 9;
+	 tput setaf 1; echo "$BACKUP_WORLD_MAKING_TAR" ; tput setaf 9;
          tar czf $backupPath/valheim-backup-$TODAY.tgz $worldpath/*
-	 tput setaf 2; echo "Process complete!" ; tput setaf 9;
+	 tput setaf 2; echo "$BACKUP_WORLD_MAKING_TAR_COMPLETE" ; tput setaf 9;
 	 sleep 1
-	 tput setaf 2; echo "Restarting the best Valheim Server in the world" ; tput setaf 9;
+	 tput setaf 2; echo "$BACKUP_WORLD_RESTARTING_SERVICES" ; tput setaf 9;
          systemctl start valheimserver.service
-         tput setaf 2; echo "Valheim Server Service Started" ; tput setaf 9;
+         tput setaf 2; echo "$BACKUP_WORLD_RESTARTING_SERVICES_1" ; tput setaf 9;
 	 echo ""
-	 tput setaf 2; echo "Setting permissions for steam on backup file" ; tput setaf 9;
+	 tput setaf 2; echo "$BACKUP_WORLD_SET_PERMS_FILES" ; tput setaf 9;
 	 chown -Rf steam:steam ${backupPath}
-	 tput setaf 2; echo "Process complete!" ; tput setaf 9;
+	 tput setaf 2; echo "$BACKUP_WORLD_PROCESS_COMPLETE" ; tput setaf 9;
     echo ""
  else 
-   tput setaf 3; echo "Backuping up of the world files .db and .fwl canceled" ; tput setaf 9;
+   tput setaf 3; echo "$BACKUP_WORLD_PROCESS_CANCELED" ; tput setaf 9;
  fi
 }
 ########################################################################
