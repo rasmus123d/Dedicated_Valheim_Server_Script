@@ -185,100 +185,98 @@ echo ""
     echo "$START_INSTALL_1_PARA"
     while true; do
       tput setaf 2; echo "$DRAW60" ; tput setaf 9;
-      tput setaf 2; echo "$NON_ROOT_STEAM_PASSWORD" ; tput setaf 9;
+      tput setaf 2; echo "$STEAM_NON_ROOT_STEAM_PASSWORD" ; tput setaf 9;
       tput setaf 2; echo "$DRAW60" ; tput setaf 9;
-      tput setaf 1; echo "$PASS_MUST_BE" ; tput setaf 9;
-      tput setaf 1; echo "$PASS_MUST_BE_1" ; tput setaf 9;
+      tput setaf 1; echo "$STEAM_PASS_MUST_BE" ; tput setaf 9;
+      tput setaf 1; echo "$STEAM_PASS_MUST_BE_1" ; tput setaf 9;
       tput setaf 2; echo "$DRAW60" ; tput setaf 9;
-      tput setaf 2; echo "Good Example: Viking12" ; tput setaf 9;
-      tput setaf 1; echo "Bad Example: Vik!" ; tput setaf 9;
-      tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+      tput setaf 2; echo "$STEAM_GOOD_EXAMPLE" ; tput setaf 9;
+      tput setaf 1; echo "$STEAM_BAD_EXAMPLE" ; tput setaf 9;
+      tput setaf 2; echo "$DRAW60" ; tput setaf 9;
       echo ""
-        read -p "Please give steam a password: " userpassword
-      tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+        read -p "$STEAM_PLEASE_ENTER_STEAM_PASSWORD" userpassword
+      tput setaf 2; echo "$DRAW60" ; tput setaf 9;
             [[ ${#userpassword} -ge 6 && "$userpassword" == *[[:lower:]]* && "$userpassword" == *[[:upper:]]* && "$userpassword" =~ ^[[:alnum:]]+$ ]] && break
-      tput setaf 2; echo "Password not accepted - Too Short or has Special Characters" ; tput setaf 9;
-      tput setaf 2; echo "I swear to LOKI, you better NOT use Special Characters" ; tput setaf 9;
+      tput setaf 2; echo "$STEAM_PASS_NOT_ACCEPTED" ; tput setaf 9;
+      tput setaf 2; echo "$STEAM_PASS_NOT_ACCEPTED_1" ; tput setaf 9;
     done
     clear
     echo ""
 # Take user input for Valheim Server Public Display
     echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "------------------Public Server Display Name----------------" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 1;  echo "Enter a name for your Valheim Server" ; tput setaf 9;
-    tput setaf 1;  echo "This is for the Public Steam Browser Listing" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2;  echo "Good Example: Zero's Viking Server" ; tput setaf 9;
-    tput setaf 1;  echo "Bad Example: Zero's #1 Server Cash Signs hashtags or other special chars, it will break the script!" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$PUBLIC_SERVER_DISPLAY_NAME" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 1; echo "$PUBLIC_SERVER_DISPLAY_NAME_1" ; tput setaf 9;
+    tput setaf 1; echo "$PUBLIC_SERVER_DISPLAY_NAME_2" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$PUBLIC_SERVER_DISPLAY_GOOD_EXAMPLE" ; tput setaf 9;
+    tput setaf 2; echo "$PUBLIC_SERVER_DISPLAY_GOOD_EXAMPLE_1" ; tput setaf 9;
+    tput setaf 1; echo "$PUBLIC_SERVER_DISPLAY_BAD_EXAMPLE" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-      read -p "Enter public server display name: " displayname
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+      read -p "$PUBLIC_SERVER_ENTER_NAME" displayname
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
     clear
 # Take user input for Valheim Server World Database Generation
     echo ""
      while true; do
-        tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-        tput setaf 2; echo "----------------------Set your World Name-------------------" ; tput setaf 9;
-        tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-        tput setaf 1;  echo "Name must be 4 Characters or more" ; tput setaf 9;
-        tput setaf 1;  echo "No Special Characters not even a space" ; tput setaf 9;
-	tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-	tput setaf 2;  echo "Good Example: ThorsHammer" ; tput setaf 9;
-        tput setaf 1;  echo "Bad Example: Loki is a Trickster" ; tput setaf 9;
-	tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+        tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+        tput setaf 2; echo "$WORLD_SET_WORLD_NAME_HEADER" ; tput setaf 9;
+        tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+        tput setaf 1; echo "$WORLD_SET_CHAR_RULES" ; tput setaf 9;
+        tput setaf 1; echo "$WORLD_SET_NO_SPECIAL_CHAR_RULES" ; tput setaf 9;
+	tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+	tput setaf 2; echo "$WORLD_GOOD_EXAMPLE" ; tput setaf 9;
+        tput setaf 1; echo "$WORLD_BAD_EXAMPLE" ; tput setaf 9;
+	tput setaf 2; echo "$DRAW60" ; tput setaf 9;
 	echo ""
-        read -p "Please make a world name: " worldname
-	tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+        read -p "$WORLD_SET_WORLD_NAME_VAR" worldname
+	tput setaf 2; echo "$DRAW60" ; tput setaf 9;
             [[ ${#worldname} -ge 4 && "$worldname" =~ ^[[:alnum:]]+$ ]] && break
-        tput setaf 2;  echo "World Name not set: Too Short or has Special Characters" ; tput setaf 9; 
-	tput setaf 2; echo "I swear to LOKI, you better NOT use Special Characters" ; tput setaf 9; 
+        tput setaf 2; echo "$WORLD_SET_ERROR" ; tput setaf 9; 
+	tput setaf 2; echo "$WORLD_SET_ERROR_1" ; tput setaf 9; 
     done
     clear
     echo ""
 # Take user input for Valheim Server password
 # Added security for harder passwords
     echo ""        
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "--------------------Set Server Access Password--------------" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 1; echo "Now for Loki, please follow instructions" ; tput setaf 9;
-    tput setaf 1; echo "Server is required to have a password" ; tput setaf 9;
-    tput setaf 1; echo "Password cannot match public display name or world name" ; tput setaf 9;
-    tput setaf 1; echo "Make your password unique" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "Your public display name: $displayname " ; tput setaf 9;
-    tput setaf 2; echo "Your world name: $worldname " ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$SERVER_ACCESS_PASS_HEADER" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 1; echo "$SERVER_ACCESS_INFO" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$SERVER_ACCESS_PUBLIC_NAME_INFO $displayname " ; tput setaf 9;
+    tput setaf 2; echo "$SERVER_ACCESS_WORLD_NAME_INFO $worldname " ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     while true; do
-    tput setaf 1;  echo "This password must be 5 Characters or more" ; tput setaf 9;
-    tput setaf 1;  echo "At least one number, one uppercase letter and one lowercase letter" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2;  echo "Good Example: Viking12" ; tput setaf 9;
-    tput setaf 1;  echo "Bad Example: Vik!" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    read -p "Enter Password to Enter your Valheim Server: " password
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 1; echo "$SERVER_ACCESS_WARN_INFO" ; tput setaf 9;
+    tput setaf 1; echo "$SERVER_ACCESS_WARN_INFO_1" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$SERVER_ACCESS_GOOD_EXAMPLE" ; tput setaf 9;
+    tput setaf 1; echo "$SERVER_ACCESS_BAD_EXAMPLE" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    read -p "$SERVER_ACCESS_ENTER_PASSWORD" password
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
         [[ ${#password} -ge 5 && "$password" == *[[:lower:]]* && "$password" == *[[:upper:]]* && "$password" =~ ^[[:alnum:]]+$ ]] && break
-    tput setaf 2; echo "Password not accepted - Too Short, Special Characters" ; tput setaf 9;
-    tput setaf 2; echo "I swear to LOKI, you better NOT use Special Characters" ; tput setaf 9;
+    tput setaf 2; echo "$SERVER_ACCESS_PASSWORD_ERROR" ; tput setaf 9;
+    tput setaf 2; echo "$SERVER_ACCESS_PASSWORD_ERROR_1" ; tput setaf 9;
     done
-        # Take user input for Sow Server Public
+        # Take user input to Show Server Public
     echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "---------------------Public Server Shown--------------------" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 1;  echo "Do you want your Server Shown Publicly" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2;  echo "Show Server in Public List: 1 " ; tput setaf 9;
-    tput setaf 1;  echo "Play Server on LAN or Not Listed Publicly: 0" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$PUBLIC_ENABLED_DISABLE_HEADER" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 1; echo "$PUBLIC_ENABLED_DISABLE_INFO" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$PUBLIC_ENABLED_DISABLE_EXAMPLE_SHOW" ; tput setaf 9;
+    tput setaf 1; echo "$PUBLIC_ENABLED_DISABLE_EXAMPLS_LAN_NO_SHOW" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-      read -p "Set Public to 1 or 0: " publicList
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+      read -p "$PUBLIC_ENABLED_DISABLE_INPUT" publicList
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
 cat >> /home/steam/serverSetup.txt <<EOF
 Here is the information you entered
