@@ -99,7 +99,7 @@ function script_check_update() {
 #Look for updates from repo tag
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
-      echo "$S
+      echo "$GITECHO"
       sleep 1
         git pull --force
 	git stash
