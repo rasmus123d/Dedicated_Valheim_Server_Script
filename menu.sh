@@ -1008,36 +1008,36 @@ function change_default_server_port() {
     print_current_config
     set_config_defaults
     echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "---------------------Set New Server Port--------------------" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 1; echo "Now for Loki, please follow instructions" ; tput setaf 9;
-    tput setaf 1; echo "The Server is required to have a port to operate on" ; tput setaf 9;
-    tput setaf 1; echo "Do not use SPECIAL characters:" ; tput setaf 9;
-    tput setaf 1; echo "New assigned port must be greater than 3000:" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "Current Server Port: ${currentPort} " ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_HEADER" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_INFO" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_INFO_1" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_INFO_2" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_INFO_3" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_CURRENT ${currentPort} " ; tput setaf 9;
+    tput setaf 2; echo $DRAW60" ; tput setaf 9;
     echo ""
     while true; do
-        read -p "Enter new Server Port (Default:2456): " setCurrentPort
+        read -p "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_EDIT_PORT " setCurrentPort
         echo ""
          #check to make sure nobody types stupid Loki Jokes in here
         [[ ${#setCurrentPort} -ge 4 && ${#setCurrentPort} -le 6 ]] && [[ $setCurrentPort -gt 1024 && $setCurrentPort -le 65530 ]] && [[ "$setCurrentPort" =~ ^[[:alnum:]]+$ ]] && break
         echo ""
-        echo "Try again, Loki got you or you typed something wrong or your port range is incorrect"
+        echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_ERROR_CHECK_MSG"
     done
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 5; echo "Old Server Port: " ${currentPort} ; tput setaf 9;
-    tput setaf 6; echo "New Server Port: " ${setCurrentPort} ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerPortChange
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 5; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_OLD_PORT" ${currentPort} ; tput setaf 9;
+    tput setaf 6; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_NEW_PORT" ${setCurrentPort} ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    read -p "$PLEASE_CONFIRM" confirmServerPortChange
     echo ""
     #if y, then continue, else cancel
     if [ "$confirmServerPortChange" == "y" ]; then
         write_config_and_restart
     else
-        echo "Canceled the changing of Server Port for Valheim - because Loki sucks"
+        echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_CANCEL"
         sleep 3
         clear
     fi
