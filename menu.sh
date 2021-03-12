@@ -1176,9 +1176,9 @@ ping -c 1 google.com &> /dev/null && echo -e '\E[32m'"$INTERNET_MSG $tecreset $I
 function menu_header() {
 get_current_config
 echo -ne "
-$(ColorOrange '╔═══════════════════════════════════════════════╗')
-$(ColorOrange '║~~~~~~~~~~~~~~~~~~-Njord Menu-~~~~~~~~~~~~~~~~~║')
-$(ColorOrange '╠═══════════════════════════════════════════════╝')
+$(ColorOrange '╔══════════════════════════════════════════════════════════╗')
+$(ColorOrange '║~~~~~~~~~~*****~~~~~~~~-Njord Menu-~~~~~~~~~*****~~~~~~~~~║')
+$(ColorOrange '╠══════════════════════════════════════════════════════════╝')
 $(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO"'') ${enHeaderMenuWelcome}
 $(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_1"'')
 $(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_2"'')
@@ -1200,7 +1200,7 @@ echo -ne "
 $(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_CURRENT_NJORD_RELEASE"' $(check_menu_script_repo)
 $(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_LOCAL_NJORD_VERSION"' ${mversion}
 $(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_GG_ZEROBANDWIDTH"'
-$(ColorOrange '╚═══════════════════════════════════════════════')"
+$(ColorOrange '╚═══════════════════════════════════════════════════════════')"
 }
 
 ########################################################################
@@ -1210,28 +1210,30 @@ menu(){
 clear
 menu_header
 echo -ne "
-$(ColorOrange '-------------Check for Script Updates-----------')
-$(ColorOrange '-')$(ColorGreen ' 1)') Update Njord Menu from GitHub
-$(ColorOrange '--------------Valheim Server Commands-----------')
-$(ColorOrange '-')$(ColorGreen ' 2)') Server Admin Tools 
-$(ColorOrange '-')$(ColorGreen ' 3)') Tech Support Tools
-$(ColorOrange '-')$(ColorGreen ' 4)') Install Valheim Server
-$(ColorOrange '---------Official Valheim Server Update---------')
-$(ColorOrange '-')$(ColorGreen ' 5)') Check and Apply Valheim Server Update
-$(ColorOrange '-----Edit start_valehim.sh Configuration--------')
-$(ColorOrange '-')$(ColorGreen ' 6)') Display Current Start Vahleim Config
-$(ColorOrange '-')$(ColorGreen ' 7)') Change Public Display Name
-$(ColorOrange '-')$(ColorGreen ' 8)') Change Default Server Port
-$(ColorOrange '-')$(ColorGreen ' 9)') Change Local World Name
-$(ColorOrange '-')$(ColorGreen ' 10)') Change Server Access Password
-$(ColorOrange '-')$(ColorGreen ' 11)') Enable Public Listing (Restarts Valheim without asking)
-$(ColorOrange '-')$(ColorGreen ' 12)') Disable Public Listing (Restarts Valehim without asking)
-$(ColorOrange '-----------------You want Mods?-----------------')
-$(ColorOrange '-')$(ColorGreen '') You must use the advance menu launcher
-$(ColorOrange '------------------------------------------------')
-$(ColorGreen ' 0)') Exit
-$(ColorOrange '------------------------------------------------')
-$(ColorPurple 'Choose an option:') "
+$(ColorOrange ''"$FUNCTION_MAIN_MENU_CHECK_SCRIPT_UPDATES_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 1)') $FUNCTION_MAIN_MENU_UPDATE_NJORD_MENU
+$(ColorOrange ''"$FUNCTION_MAIN_MENU_SERVER_COMMANDS_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 2)') $FUNCTION_MAIN_MENU_TECH_MENU
+$(ColorOrange '-')$(ColorGreen ' 3)') $FUNCTION_MAIN_MENU_INSTALL_VALHEIM
+$(ColorOrange ''"$FUNCTION_MAIN_MENU_OFFICAL_VALHEIM_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 4)') $FUNCTION_MAIN_MENU_CHECK_APPLY_VALHEIM_UPDATES
+$(ColorOrange ''"$FUNCTION_MAIN_MENU_EDIT_VALHEIM_CONFIG_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 5)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_DISPLAY_CONFIG
+$(ColorOrange '-')$(ColorGreen ' 6)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_CHANGE_PUBLIC_NAME
+$(ColorOrange '-')$(ColorGreen ' 7)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_CHANGE_SERVER_PORT
+$(ColorOrange '-')$(ColorGreen ' 8)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_CHANGE_WORLD_NAME
+$(ColorOrange '-')$(ColorGreen ' 9)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_CHANGE_ACCESS_PASS
+$(ColorOrange '-')$(ColorGreen ' 10)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_ENABLE_PUBLIC_LISTING
+$(ColorOrange '-')$(ColorGreen ' 11)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_DISABLE_PUBLIC_LISTING
+$(ColorOrange ''"$DRAW60"'')
+$(ColorOrange '-')$(ColorGreen ' 12)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_BACKUP_WORLD_DATA
+$(ColorOrange '-')$(ColorGreen ' 13)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_RESTORE_WORLD_DATA
+$(ColorOrange ''"$FUNCTION_MAIN_MENU_EDIT_VALHEIM_MODS_HEADER"'')
+$(ColorOrange '-')$(ColorGreen '') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_MODS_MSG
+$(ColorOrange ''"$DRAW60"'')
+$(ColorGreen ' 0)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_EXIT
+$(ColorOrange ''"$DRAW60"'')
+$(ColorPurple ''"$$CHOOSE_MENU_OPTION"'') "
         read a
         case $a in
 	        1) script_check_update ; menu ;;
