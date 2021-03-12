@@ -99,13 +99,13 @@ function script_check_update() {
 #Look for updates from repo tag
     git fetch
       [ -n "$(git diff --name-only "$UPSTREAM" "$SCRIPTFILE")" ] && {
-      echo "$GITECHO"
+      echo "$GIT_ECHO_CHECK"
       sleep 1
         git pull --force
 	git stash
         git checkout "$BRANCH"
         git pull --force
-	echo " Updating"
+	echo "$GIT_ECHO_UPDATING"
       	sleep 1
 	chmod +x menu.sh
 	sleep 1
@@ -116,7 +116,7 @@ function script_check_update() {
         # Now exit this old instance
         exit 1
     }
-   echo "Oh for Loki sakes! No updates to be had... back to choring! "
+   echo "$GIT_ECHO_NO_UPDATES"
 }
 
 
@@ -1045,11 +1045,7 @@ function change_default_server_port() {
 
 function change_local_world_name() {
     echo ""
-    echo "Not sure if I should allow people to do this"
-    echo "Follow the wiki, if you feel the need to change your world name"
-    echo "https://github.com/Nimdy/Dedicated_Valheim_Server_Script/wiki/Migrate-Valheim-Map-Data-from-server-to-server"
-    echo "I fear too many people will end up breaking their servers, if I add this now"
-    echo "Don't you have some bees to go check on?"
+    echo "$FUNCTION_CHANGE_LOCAL_WORLD_NAME_MSG"
     echo ""
 }
 
@@ -1058,41 +1054,41 @@ function change_server_access_password() {
     print_current_config
     set_config_defaults
     echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "---------------Set New Server Access Password---------------" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 1; echo "Now for Loki, please follow instructions" ; tput setaf 9;
-    tput setaf 1; echo "Valheim requires a UNIQUE password 6 characaters or longer" ; tput setaf 9;
-    tput setaf 1; echo "UNIQUE means Password can not match Public and World Names" ; tput setaf 9;
-    tput setaf 1; echo "Do not use SPECIAL characters:" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 5; echo "Current Public Display Name:" ${currentDisplayName} ; tput setaf 9;
-    tput setaf 5; echo "Current World Name:" ${currentWorldName} ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "Current Access Password: ${currentPassword} " ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_HEADER" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_INFO" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_INFO_1" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_INFO_2" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_INFO_3" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 5; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_CURRENT_DISPLAY_NAME" ${currentDisplayName} ; tput setaf 9;
+    tput setaf 5; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_CURRENT_WORLD_NAME" ${currentWorldName} ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_CURRENT_PASS ${currentPassword} " ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     while true; do
-        tput setaf 1; echo "This password must be 5 Characters or more" ; tput setaf 9;
-        tput setaf 1; echo "At least one number, one uppercase letter and one lowercase letter" ; tput setaf 9;
-        tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-        tput setaf 2; echo "Good Example: Viking12" ; tput setaf 9;
-        tput setaf 1; echo "Bad Example: Vik!" ; tput setaf 9;
-        tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-        read -p "Enter Password to Enter your Valheim Server: " setCurrentPassword
-        tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+        tput setaf 1; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_INFO_RULES" ; tput setaf 9;
+        tput setaf 1; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_INFO_RULES_1" ; tput setaf 9;
+        tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+        tput setaf 2; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_GOOD" ; tput setaf 9;
+        tput setaf 1; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_BAD" ; tput setaf 9;
+        tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+        read -p "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_ENTER_NEW " setCurrentPassword
+        tput setaf 2; echo "$DRAW60" ; tput setaf 9;
         [[ ${#setCurrentPassword} -ge 5 && "$setCurrentPassword" == *[[:lower:]]* && "$setCurrentPassword" == *[[:upper:]]* && "$setCurrentPassword" =~ ^[[:alnum:]]+$ ]] && break
-        tput setaf 2; echo "Password not accepted - Too Short, Special Characters" ; tput setaf 9;
-        tput setaf 2; echo "I swear to LOKI, you better NOT use Special Characters" ; tput setaf 9;
+        tput setaf 2; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_ERROR_MSG" ; tput setaf 9;
+        tput setaf 2; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_ERROR_MSG_1" ; tput setaf 9;
     done
     echo ""
-    tput setaf 5; echo "Old Server Access Password:" ${currentPassword} ; tput setaf 9;
-    tput setaf 5; echo "New Server Access Password:" ${setCurrentPassword} ; tput setaf 9;
-    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmServerAccessPassword
+    tput setaf 5; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_OLD_PASS" ${currentPassword} ; tput setaf 9;
+    tput setaf 5; echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_NEW_PASS" ${setCurrentPassword} ; tput setaf 9;
+    read -p "$PLEASE_CONFIRM" confirmServerAccessPassword
     #if y, then continue, else cancel
     if [ "$confirmServerAccessPassword" == "y" ]; then
         write_config_and_restart
     else
-        echo "Canceled the renaming of Public Valheim Server Display Name - because Loki sucks"
+        echo "$FUNCTION_CHANGE_SERVER_ACCESS_PASSWORD_CANCEL"
         sleep 3
         clear
     fi
