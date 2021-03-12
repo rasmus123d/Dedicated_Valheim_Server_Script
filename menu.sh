@@ -1172,36 +1172,36 @@ function are_you_connected() {
 ping -c 1 google.com &> /dev/null && echo -e '\E[32m'"$INTERNET_MSG $tecreset $INTERNET_MSG_CONNECTED" || echo -e '\E[32m'"$INTERNET_MSG $tecreset $INTERNET_MSG_DISCONNECTED"
 
 }
-
 function menu_header() {
 get_current_config
 echo -ne "
 $(ColorOrange '╔══════════════════════════════════════════════════════════╗')
 $(ColorOrange '║~~~~~~~~~~*****~~~~~~~~-Njord Menu-~~~~~~~~~*****~~~~~~~~~║')
 $(ColorOrange '╠══════════════════════════════════════════════════════════╝')
-$(ColorOrange '║'"$FUNCTION_HEADER_MENU_INFO"'')
-$(ColorOrange '║'"$FUNCTION_HEADER_MENU_INFO_1"'')
-$(ColorOrange '║'"$FUNCTION_HEADER_MENU_INFO_2"'')
-$(ColorOrange '║') 
-$(ColorOrange '║'"$FUNCTION_HEADER_MENU_INFO_VALHEIM_OFFICIAL_BUILD"' $(check_official_valheim_release_build) ')"
+$(ColorOrange '║' "$FUNCTION_HEADER_MENU_INFO"'')
+$(ColorOrange '║' "$FUNCTION_HEADER_MENU_INFO_1"'')
+$(ColorOrange '║' "$FUNCTION_HEADER_MENU_INFO_2"'')
+$(ColorOrange '║')
+$(ColorOrange '║'"$FUNCTION_HEADER_MENU_INFO_VALHEIM_OFFICIAL_BUILD"'')" $(check_official_valheim_release_build)
 echo -ne "
 $(ColorOrange '║'"$FUNCTION_HEADER_MENU_INFO_VALHEIM_LOCAL_BUILD"' ')" $(check_local_valheim_build)
 echo -ne "
-$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_SERVER_NAME"' ${currentDisplayName}
+$(ColorOrange '║') $FUNCTION_HEADER_MENU_INFO_SERVER_NAME ${currentDisplayName}
 $(ColorOrange '║') $(are_you_connected)
 $(ColorOrange '║')" $(display_public_IP)
 echo -ne "
 $(ColorOrange '║')" $(display_local_IP)
 echo -ne "
-$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_SERVER_PORT"' " ${currentPort}
+$(ColorOrange '║') $FUNCTION_HEADER_MENU_INFO_SERVER_PORT " ${currentPort}
 echo -ne "
-$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_PUBLIC_LIST"' " $(display_public_status_on_or_off)
+$(ColorOrange '║') $FUNCTION_HEADER_MENU_INFO_PUBLIC_LIST " $(display_public_status_on_or_off)
 echo -ne "
-$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_CURRENT_NJORD_RELEASE"' $(check_menu_script_repo)
-$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_LOCAL_NJORD_VERSION"' ${mversion}
-$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_GG_ZEROBANDWIDTH"'
+$(ColorOrange '║') $FUNCTION_HEADER_MENU_INFO_CURRENT_NJORD_RELEASE $(check_menu_script_repo)
+$(ColorOrange '║') $FUNCTION_HEADER_MENU_INFO_LOCAL_NJORD_VERSION ${mversion}
+$(ColorOrange '║') $FUNCTION_HEADER_MENU_INFO_GG_ZEROBANDWIDTH
 $(ColorOrange '╚═══════════════════════════════════════════════════════════')"
 }
+
 
 ########################################################################
 #######################Display Main Menu System#########################
@@ -1233,7 +1233,7 @@ $(ColorOrange '-')$(ColorGreen '') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_MODS_MSG
 $(ColorOrange ''"$DRAW60"'')
 $(ColorGreen ' 0)') $FUNCTION_MAIN_MENU_EDIT_VALHEIM_EXIT
 $(ColorOrange ''"$DRAW60"'')
-$(ColorPurple ''"$$CHOOSE_MENU_OPTION"'') "
+$(ColorPurple ''"$CHOOSE_MENU_OPTION"'') "
         read a
         case $a in
 	        1) script_check_update ; menu ;;
