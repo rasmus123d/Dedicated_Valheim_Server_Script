@@ -451,7 +451,7 @@ function backup_world_data() {
          ## Clean up files older than 2 weeks. Create a new backup.
 	 tput setaf 1; echo "$BACKUP_WORLD_CONDUCT_CLEANING" ; tput setaf 9;
          find $backupPath/* -mtime +14 -type f -delete
-	 tput setaf 2; echo "BACKUP_WORLD_CONDUCT_CLEANING_LOKI" ; tput setaf 9;
+	 tput setaf 2; echo "$BACKUP_WORLD_CONDUCT_CLEANING_LOKI" ; tput setaf 9;
          sleep 1
          ## Tar Section. Create a backup file, with the current date in its name.
          ## Add -h to convert the symbolic links into a regular files.
