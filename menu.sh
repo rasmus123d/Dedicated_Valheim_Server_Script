@@ -138,7 +138,7 @@ tput setaf 2; echo "$CONFIRMVALINSTALL_1" ; tput setaf 9;
 echo -ne "
 $(ColorRed ''"$DRAW60"'')"
 echo ""
- read -p "$PLEASECONFIRM" confirmStartInstall
+ read -p "$PLEASE_CONFIRM" confirmStartInstall
 #if y, then continue, else cancel
         if [ "$confirmStartInstall" == "y" ]; then
     echo ""
@@ -548,24 +548,24 @@ function continue_with_valheim_update_install() {
     clear
     echo ""
     echo -ne "
-$(ColorOrange '-----------------Installing Valheim Updates-----------------')
-$(ColorRed '------------------------------------------------------------')"
+$(ColorOrange ''"$FUNCTION_INSTALL_VALHEIM_UPDATES"'')
+$(ColorRed ''"$DRAW60"'')"
 echo ""
-tput setaf 2; echo "A NEW update was found!" ; tput setaf 9;
-tput setaf 2; echo "You are about to apply Official Valheim Updates" ; tput setaf 9; 
-tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9; 
+tput setaf 2; echo "$FUNCTION_INSTALL_VALHEIM_FOUND" ; tput setaf 9;
+tput setaf 2; echo "$FUNCTION_INSTALL_VALHEIM_UPDATE_INFO" ; tput setaf 9; 
+tput setaf 2; echo "$FUNCTION_INSTALL_VALHEIM_UPDATE_CONFIRM" ; tput setaf 9; 
 echo -ne "
-$(ColorRed '------------------------------------------------------------')"
+$(ColorRed ''"$DRAW60"'')"
 echo ""
- read -p "Please confirm:" confirmOfficialUpdates
+ read -p "$PLEASE_CONFIRM" confirmOfficialUpdates
 #if y, then continue, else cancel
 if [ "$confirmOfficialUpdates" == "y" ]; then
-    tput setaf 2; echo "Using Thor's Hammer to apply Official Updates!" ; tput setaf 9; 
+    tput setaf 2; echo "$FUNCTION_INSTALL_VALHEIM_UPDATE_APPLY_INFO" ; tput setaf 9; 
     /home/steam/steamcmd +login anonymous +force_install_dir ${valheimInstallPath} +app_update 896660 validate +exit
     chown -R steam:steam ${valheimInstallPath}
     echo ""
 else
-    echo "Canceling all Official Updates for Valheim Server - because Loki sucks"
+    echo "$FUNCTION_INSTALL_VALHEIM_UPDATES_CANCEL"
     sleep 3
     clear
 fi
@@ -594,24 +594,24 @@ fi
 
 function check_apply_server_updates_beta() {
     echo ""
-    echo "Downloading Official Valheim Repo Log Data for comparison only"
+    echo "$FUNCTION_APPLY_SERVER_UPDATES"
       [ ! -d /opt/valheimtemp ] && mkdir -p /opt/valheimtemp
       /home/steam/steamcmd +login anonymous +force_install_dir /opt/valheimtemp +app_update 896660 validate +exit
       sed -e 's/[\t ]//g;/^$/d' /opt/valheimtemp/steamapps/appmanifest_896660.acf > appmanirepo.log
       repoValheim=$(sed -n '11p' appmanirepo.log)
-      echo "Official Valheim-: $repoValheim"
+      echo "$FUNCTION_APPLY_SERVER_UPDATES_OFFICIAL_VALHEIM_REPO $repoValheim"
       sed -e 's/[\t ]//g;/^$/d' ${valheimInstallPath}/steamapps/appmanifest_896660.acf > appmanilocal.log
       localValheim=$(sed -n '11p' appmanilocal.log)
-      echo "Local Valheim Ver: $localValheim"
+      echo "$FUNCTION_APPLY_SERVER_UPDATES_OFFICIAL_VALHEIM_LOCAL $localValheim"
       if [ "$repoValheim" == "$localValheim" ]; then
-        echo "No new Updates found"
-        echo "Cleaning up TEMP FILES"
+        echo "$FUNCTION_APPLY_SERVER_UPDATES_NO"
+        echo "$FUNCTION_APPLY_SERVER_UPDATES_CLEAN_TMP"
         rm -Rf /opt/valheimtemp
         rm appmanirepo.log
         rm appmanilocal.log
     sleep 2
     else
-    echo "Update Found kicking process to Odin for updating!"
+    echo "$FUNCTION_APPLY_SERVER_UPDATES_INFO"
     sleep 2
         continue_with_valheim_update_install
         echo ""
@@ -624,22 +624,22 @@ function check_apply_server_updates_beta() {
 function confirm_check_apply_server_updates() {
 while true; do
 echo -ne "
-$(ColorRed '------------------------------------------------------------')"
+$(ColorRed ''"$DRAW60"'')"
 echo ""
-tput setaf 2; echo "The Script will download the Log Data from the official" ; tput setaf 9;
-tput setaf 2; echo "Steam Valheim Repo and compare the data." ; tput setaf 9;
-tput setaf 2; echo "No changes will be made, until you agree later." ; tput setaf 9;
-tput setaf 2; echo "Press y(YES) and n(NO)" ; tput setaf 9;
+tput setaf 2; echo "$FUNCTION_CONFIRM_CHECK_APPLY_SERVER_UPDATES_INFO" ; tput setaf 9;
+tput setaf 2; echo "$FUNCTION_CONFIRM_CHECK_APPLY_SERVER_UPDATES_INFO_1" ; tput setaf 9;
+tput setaf 2; echo "$FUNCTION_CONFIRM_CHECK_APPLY_SERVER_UPDATES_INFO_2" ; tput setaf 9;
+tput setaf 2; echo "$PLEASE_CONFIRM" ; tput setaf 9;
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
 echo ""
-tput setaf 2; read -p "Do you wish to continue?" yn ; tput setaf 9; 
+tput setaf 2; read -p "$FUNCTION_CONFIRM_CHECK_APPLY_SERVER_UPDATES_CONTINUE" yn ; tput setaf 9; 
 echo -ne "
 $(ColorRed '------------------------------------------------------------')"
     case $yn in
         [Yy]* ) check_apply_server_updates_beta; break;;
         [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "$PLEASE_CONFIRM";;
     esac
 done
 }
