@@ -278,23 +278,9 @@ echo ""
       read -p "$PUBLIC_ENABLED_DISABLE_INPUT" publicList
     tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-echo "$CREDS_CAT_INSTALL_CREDS_TO_FILE" >> /home/steam/serverSetup.txt
-
-#not sure if above will work... need to test
-#cat >> /home/steam/serverSetup.txt <<EOF
-#Here is the information you entered
-#This information is for you to ref later, in case you forgot
-#---------------------------------------------------------------
-#nonroot steam password:  $userpassword
-#Public Server Name:      $displayname
-#Local World Name:        $worldname
-#Valheim Server Password: $password
-#Show Public: $publicList
-#---------------------------------------------------------------
-#Each time this is ran, the past info will be added to each line
-#---------------------------------------------------------------
-#EOF
-
+    
+echo -e $CREDS_CAT_INSTALL_CREDS_TO_FILE >> serverSetup.txt
+sleep 1
 chown steam:steam /home/steam/serverSetup.txt
 clear
 
