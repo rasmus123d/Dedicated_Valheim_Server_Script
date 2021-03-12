@@ -931,7 +931,7 @@ function set_config_defaults() {
 }
 
 function write_config_and_restart() {
-    tput setaf 1; echo "Rebuilding Valheim start_valheim.sh configuration file" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_WRITE_CONFIG_RESTART_INFO" ; tput setaf 9;
     sleep 1
     cat > ${valheimInstallPath}/start_valheim.sh <<EOF
 #!/bin/bash
@@ -943,11 +943,11 @@ export SteamAppId=892970
 ./valheim_server.x86_64 -name "${setCurrentDisplayName}" -port ${setCurrentPort} -nographics -batchmode -world "${setCurrentWorldName}" -password "${setCurrentPassword}" -public "${setCurrentPublicSet}"
 export LD_LIBRARY_PATH=\$templdpath
 EOF
-   echo "Setting Ownership to steam user and execute permissions on " ${valheimInstallPath}/start_valheim.sh
+   echo "$FUNCTION_WRITE_CONFIG_RESTART_SET_PERMS" ${valheimInstallPath}/start_valheim.sh
    chown steam:steam ${valheimInstallPath}/start_valheim.sh
    chmod +x ${valheimInstallPath}/start_valheim.sh
-   echo "done"
-   echo "Restarting Valheim Server Service"
+   echo "$ECHO_DONE"
+   echo "$FUNCTION_WRITE_CONFIG_RESTART_SERVICE_INFO"
    sudo systemctl restart valheimserver.service
    echo ""
 }
@@ -971,33 +971,33 @@ function change_public_display_name() {
     print_current_config
     set_config_defaults
     echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "------------------Set New Public Display Name---------------" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 1; echo "Now for Loki, please follow instructions" ; tput setaf 9;
-    tput setaf 1; echo "The Server is required to have a public display name" ; tput setaf 9;
-    tput setaf 1; echo "Do not use SPECIAL characters:" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
-    tput setaf 2; echo "Current Public Display Name: ${currentDisplayName}" ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$FUNCTION_CHANGE_PUBLIC_DISPLAY_NAME_HEADER" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_PUBLIC_DISPLAY_NAME_INFO" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_PUBLIC_DISPLAY_NAME_INFO_1" ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_PUBLIC_DISPLAY_NAME_INFO_2" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$FUNCTION_CHANGE_PUBLIC_DISPLAY_CURRENT_NAME ${currentDisplayName}" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-    read -p "Enter new public server display name: " setCurrentDisplayName
+    read -p "$FUNCTION_CHANGE_PUBLIC_DISPLAY_EDIT_NAME_INFO" setCurrentDisplayName
     echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-    tput setaf 5; echo "Old Public Display Name: " ${currentDisplayName} ; tput setaf 9;
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 5; echo "$FUNCTION_CHANGE_PUBLIC_DISPLAY_OLD_PUBLIC_NAME" ${currentDisplayName} ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-    tput setaf 1; echo "New Public Display Name:" ${setCurrentDisplayName} ; tput setaf 9;
+    tput setaf 1; echo "$FUNCTION_CHANGE_PUBLIC_DISPLAY_NEW_PUBLIC_NAME" ${setCurrentDisplayName} ; tput setaf 9;
     echo ""
-    tput setaf 2; echo "------------------------------------------------------------" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-    read -p "Do you wish to continue with these changes? (y=Yes, n=No):" confirmPublicNameChange
+    read -p "$PLEASE_CONFIRM" confirmPublicNameChange
     #if y, then continue, else cancel
     if [ "$confirmPublicNameChange" == "y" ]; then
         write_config_and_restart
     else
-        echo "Canceled the renaming of Public Valheim Server Display Name - because Loki sucks"
+        echo "$FUNCTION_CHANGE_PUBLIC_DISPLAY_CANCEL_CHANGING"
         sleep 3
         clear
     fi
