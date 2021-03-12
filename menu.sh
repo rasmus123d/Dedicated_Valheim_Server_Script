@@ -278,8 +278,13 @@ echo ""
       read -p "$PUBLIC_ENABLED_DISABLE_INPUT" publicList
     tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
-    
-echo -e $CREDS_CAT_INSTALL_CREDS_TO_FILE >> serverSetup.txt
+echo "$DRAW60" >> /home/steam/serverSetup.txt
+echo $CREDS_DISPLAY_CREDS_PRINT_OUT_STEAM_PASSWORD $userpassword >> /home/steam/serverSetup.txt
+echo $CREDS_DISPLAY_CREDS_PRINT_OUT_SERVER_NAME $displayname >> /home/steam/serverSetup.txt
+echo $CREDS_DISPLAY_CREDS_PRINT_OUT_WORLD_NAME $worldname >> /home/steam/serverSetup.txt
+echo $CREDS_DISPLAY_CREDS_PRINT_OUT_ACCESS_PASS $password >> /home/steam/serverSetup.txt
+echo $CREDS_DISPLAY_CREDS_PRINT_OUT_SHOW_PUBLIC $publicList >> /home/steam/serverSetup.txt
+echo "$DRAW60" >> /home/steam/serverSetup.txt
 sleep 1
 chown steam:steam /home/steam/serverSetup.txt
 clear
