@@ -867,21 +867,21 @@ admin_tools_menu(){
 menu_header
 echo ""
 echo -ne "
-$(ColorOrange '---------------Valheim Backup and Restore Tools-------------')
-$(ColorOrange '-')$(ColorGreen ' 1)') Backup World (stop/starts Valheim)
-$(ColorOrange '-')$(ColorGreen ' 2)') Restore World
-$(ColorOrange '--------------------Valheim Service Tools-------------------')
-$(ColorOrange '-')$(ColorGreen ' 3)') Stop Valheim Server
-$(ColorOrange '-')$(ColorGreen ' 4)') Start Valheim Server
-$(ColorOrange '-')$(ColorGreen ' 5)') Restart Valheim Server
-$(ColorOrange '-')$(ColorGreen ' 6)') Status Valheim Server
-$(ColorOrange '----------------Official Valheim Server Update--------------')
-$(ColorOrange '-')$(ColorGreen ' 7)') Check and Apply Valheim Server Update
-$(ColorOrange '-------------Edit start_valehim.sh Configuration------------')
-$(ColorOrange '-')$(ColorGreen ' 8)') Display or Edit Valheim Config File
-$(ColorOrange '------------------------------------------------------------')
-$(ColorOrange '-')$(ColorGreen ' 0)') Go to Main Menu
-$(ColorPurple 'Choose an option:') "
+$(ColorOrange ''"$FUNCTION_ADMIN_TOOLS_MENU_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 1)') $FUNCTION_ADMIN_TOOLS_MENU_BACKUP
+$(ColorOrange '-')$(ColorGreen ' 2)') $FUNCTION_ADMIN_TOOLS_MENU_RESTORE
+$(ColorOrange ''"$FUNCTION_ADMIN_TOOLS_MENU_TOOLS_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 3)') $FUNCTION_ADMIN_TOOLS_MENU_STOP_SERVICE
+$(ColorOrange '-')$(ColorGreen ' 4)') $FUNCTION_ADMIN_TOOLS_MENU_START_SERVICE
+$(ColorOrange '-')$(ColorGreen ' 5)') $FUNCTION_ADMIN_TOOLS_MENU_RESTART_SERVICE
+$(ColorOrange '-')$(ColorGreen ' 6)') $FUNCTION_ADMIN_TOOLS_MENU_STATUS_SERVICE
+$(ColorOrange ''"$FUNCTION_ADMIN_TOOLS_MENU_UPDATE_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 7)') $FUNCTION_ADMIN_TOOLS_MENU_CHECK_VALHEIM_UPDATES
+$(ColorOrange ''"$FUNCTION_ADMIN_TOOLS_MENU_EDIT_CONFIG_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 8)') $FUNCTION_ADMIN_TOOLS_MENU_DISPLAY_EDIT_VALHEIM_CONFIG
+$(ColorOrange ''"$DRAW60"'')
+$(ColorOrange '-')$(ColorGreen ' 0)') $RETURN_MAIN_MENU
+$(ColorPurple ''"$CHOOSE_MENU_OPTION"'') "
         read a
         case $a in
 		1) backup_world_data ; admin_tools_menu ;;
@@ -893,7 +893,7 @@ $(ColorPurple 'Choose an option:') "
 		7) confirm_check_apply_server_updates ; admin_tools_menu ;;
 		8) admin_valheim_config_edit ; admin_tools_menu ;;		
 		   0) menu ; menu ;;
-		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; admin_tools_menu ;;
+		    *)  echo -ne " $(ColorRed ''"$WRONG_MENU_OPTION"'')" ; admin_tools_menu ;;
         esac
 }
 
@@ -910,11 +910,13 @@ function get_current_config() {
 
 function print_current_config() {
     clear
-    echo "Current Public Server Name:-------------> $(tput setaf 2)${currentDisplayName} $(tput setaf 9) "
-    echo "Current Port Information(default:2456):-> $(tput setaf 2)${currentPort} $(tput setaf 9) "
-    echo "Current Local World Name:---------------> $(tput setaf 2)${currentWorldName} $(tput setaf 1) Do not change unless you know what you are doing $(tput setaf 9)"
-    echo "Current Server Access Password:---------> $(tput setaf 2)${currentPassword} $(tput setaf 9) "
-    echo "Current Public Option is:---------------> $(tput setaf 2)${currentPublicSet}  $(tput setaf 9)          0 Is OFF or LAN Parties - 1  ON for Public Listing"
+    echo "$FUNCTION_PRINT_CURRENT_CONFIG_PUBLIC_NAME $(tput setaf 2)${currentDisplayName} $(tput setaf 9) "
+    echo "$FUNCTION_PRINT_CURRENT_CONFIG_PORT $(tput setaf 2)${currentPort} $(tput setaf 9) "
+    echo "$FUNCTION_PRINT_CURRENT_CONFIG_LOCAL_WORLD_NAME $(tput setaf 2)${currentWorldName} $(tput setaf 9)"
+    ECHO "$FUNCTION_PRINT_CURRENT_CONFIG_LOCAL_WORLD_NAME_INFO"
+    echo "$FUNCTION_PRINT_CURRENT_CONFIG_ACCESS_PASSWORD $(tput setaf 2)${currentPassword} $(tput setaf 9) "
+    echo "$FUNCTION_PRINT_CURRENT_CONFIG_PUBLIC_LISTING $(tput setaf 2)${currentPublicSet}  $(tput setaf 9) "
+    echo "$FUNCTION_PRINT_CURRENT_CONFIG_PUBLIC_LISTING_INFO"
 }
 
 function set_config_defaults() {
