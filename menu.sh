@@ -1179,7 +1179,7 @@ echo -ne "
 $(ColorOrange '╔══════════════════════════════════════════════════════════╗')
 $(ColorOrange '║~~~~~~~~~~*****~~~~~~~~-Njord Menu-~~~~~~~~~*****~~~~~~~~~║')
 $(ColorOrange '╠══════════════════════════════════════════════════════════╝')
-$(ColorOrange '║ '$FUNCTION_HEADER_MENU_INFO ') ${enHeaderMenuWelcome}
+$(ColorOrange '║ '$FUNCTION_HEADER_MENU_INFO ')
 $(ColorOrange '║ '$FUNCTION_HEADER_MENU_INFO_1')
 $(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_2"')"
 $(ColorOrange '║') 
