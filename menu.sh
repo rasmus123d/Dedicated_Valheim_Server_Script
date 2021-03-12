@@ -837,17 +837,17 @@ function tech_support(){
 menu_header
 echo ""
 echo -ne "
-$(ColorOrange '--------------------Valheim Tech Support--------------------')
-$(ColorOrange '-')$(ColorGreen ' 1)') Display Valheim Config File
-$(ColorOrange '-')$(ColorGreen ' 2)') Display Valheim Server Service
-$(ColorOrange '-')$(ColorGreen ' 3)') Display World Data Folder
-$(ColorOrange '-')$(ColorGreen ' 4)') Display System Info
-$(ColorOrange '-')$(ColorGreen ' 5)') Display Network Info
-$(ColorOrange '-')$(ColorGreen ' 6)') Display Connected Players History
+$(ColorOrange ''"$FUNCTION_VALHEIM_TECH_SUPPORT_HEADER"'')
+$(ColorOrange '-')$(ColorGreen ' 1)') $FUNCTION_VALHEIM_TECH_SUPPORT_DISPLAY_CONFIG
+$(ColorOrange '-')$(ColorGreen ' 2)') $FUNCTION_VALHEIM_TECH_SUPPORT_DISPLAY_VALHEIM_SERVICE
+$(ColorOrange '-')$(ColorGreen ' 3)') $FUNCTION_VALHEIM_TECH_SUPPORT_DISPLAY_WORLD_DATA
+$(ColorOrange '-')$(ColorGreen ' 4)') $FUNCTION_VALHEIM_TECH_SUPPORT_DISPLAY_SYSTEM_INFO
+$(ColorOrange '-')$(ColorGreen ' 5)') $FUNCTION_VALHEIM_TECH_SUPPORT_DISPLAY_NETWORK_INFO
+$(ColorOrange '-')$(ColorGreen ' 6)') $FUNCTION_VALHEIM_TECH_SUPPORT_DISPLAY_CONNECTED_PLAYER_HISTORY
 $(ColorOrange '------------------------------------------------------------')
-$(ColorOrange '-')$(ColorGreen ' 0)') Go to Main Menu
+$(ColorOrange '-')$(ColorGreen ' 0)') "$RETURN_MAIN_MENU"
 $(ColorOrange '------------------------------------------------------------')
-$(ColorPurple 'Choose an option:') "
+$(ColorPurple ''"$CHOOSE_MENU_OPTION"'') "
         read a
         case $a in
 	        1) display_start_valheim ; tech_support ;; 
@@ -857,7 +857,7 @@ $(ColorPurple 'Choose an option:') "
 		5) display_network_info ; tech_support ;;
 	        6) display_player_history ; tech_support ;;
 		  0) menu ; menu ;;
-		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; tech_support ;;
+		    *)  echo -ne " $(ColorRed ''"$WRONG_MENU_OPTION"'')" ; tech_support ;;
         esac
 }
 ########################################################################
