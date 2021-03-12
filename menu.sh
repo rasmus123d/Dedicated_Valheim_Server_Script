@@ -1178,13 +1178,13 @@ echo -ne "
 $(ColorOrange '╔══════════════════════════════════════════════════════════╗')
 $(ColorOrange '║~~~~~~~~~~*****~~~~~~~~-Njord Menu-~~~~~~~~~*****~~~~~~~~~║')
 $(ColorOrange '╠══════════════════════════════════════════════════════════╝')
-$(ColorOrange '║' "$FUNCTION_HEADER_MENU_INFO"'')
-$(ColorOrange '║' "$FUNCTION_HEADER_MENU_INFO_1"'')
-$(ColorOrange '║' "$FUNCTION_HEADER_MENU_INFO_2"'')
+$(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO"'')
+$(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_1"'')
+$(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_2"'')
 $(ColorOrange '║')
-$(ColorOrange '║'"$FUNCTION_HEADER_MENU_INFO_VALHEIM_OFFICIAL_BUILD"'')" $(check_official_valheim_release_build)
+$(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_VALHEIM_OFFICIAL_BUILD"'')" $(check_official_valheim_release_build)
 echo -ne "
-$(ColorOrange '║'"$FUNCTION_HEADER_MENU_INFO_VALHEIM_LOCAL_BUILD"' ')" $(check_local_valheim_build)
+$(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_VALHEIM_LOCAL_BUILD"' ')"        $(check_local_valheim_build)
 echo -ne "
 $(ColorOrange '║') $FUNCTION_HEADER_MENU_INFO_SERVER_NAME ${currentDisplayName}
 $(ColorOrange '║') $(are_you_connected)
