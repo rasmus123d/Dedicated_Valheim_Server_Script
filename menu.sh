@@ -1237,19 +1237,18 @@ $(ColorPurple ''"$CHOOSE_MENU_OPTION"'') "
         read a
         case $a in
 	        1) script_check_update ; menu ;;
-		2) admin_tools_menu ; menu ;;
-		3) tech_support ; menu ;;
-		4) server_install_menu ; menu ;;
-		5) confirm_check_apply_server_updates ; menu ;;	
-	        6) display_full_config ; menu ;;
-	        7) change_public_display_name ; menu ;;
-	        8) change_default_server_port ; menu ;;		
-	        9) change_local_world_name ; menu ;;
-	        10) change_server_access_password ; menu ;;
-		11) write_public_on_config_and_restar ; menu ;;
-		12) write_public_off_config_and_restart ; menu ;;
-		13) backup_world_data ; menu ;;
-		14) restore_world_data ; menu ;;
+		2) tech_support ; menu ;;
+		3) server_install_menu ; menu ;;
+		4) confirm_check_apply_server_updates ; menu ;;	
+	        5) display_full_config ; menu ;;
+	        6) change_public_display_name ; menu ;;
+	        7) change_default_server_port ; menu ;;		
+	        8) change_local_world_name ; menu ;;
+	        9) change_server_access_password ; menu ;;
+		10) write_public_on_config_and_restar ; menu ;;
+		11) write_public_off_config_and_restart ; menu ;;
+		12) backup_world_data ; menu ;;
+		13) restore_world_data ; menu ;;
                    0) exit 0 ;;
 		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; menu ;;
         esac
