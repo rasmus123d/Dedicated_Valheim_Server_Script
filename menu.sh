@@ -668,23 +668,23 @@ function stop_valheim_server() {
     clear
     echo ""
     echo -ne "
-$(ColorOrange '--------------------Stop Valheim Server---------------------')
-$(ColorRed '------------------------------------------------------------')"
+$(ColorOrange ''"$FUNCTION_STOP_VALHEIM_SERVER_SERVICE_HEADER"'')
+$(ColorRed ''"$DRAW60"'')"
 echo ""
-tput setaf 2; echo "You are about to STOP the Valheim Server" ; tput setaf 9; 
-tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9; 
+tput setaf 2; echo "$FUNCTION_STOP_VALHEIM_SERVER_SERVICE_INFO" ; tput setaf 9; 
+tput setaf 2; echo "$FUNCTION_STOP_VALHEIM_SERVER_SERVICE_INFO_1" ; tput setaf 9; 
 echo -ne "
-$(ColorRed '------------------------------------------------------------')"
+$(ColorRed ''"$DRAW60"'')"
 echo ""
- read -p "Please confirm:" confirmStop
+ read -p "$PLEASE_CONFIRM" confirmStop
 #if y, then continue, else cancel
         if [ "$confirmStop" == "y" ]; then
     echo ""
-    echo "Stopping Valheim Server Services"
+    echo "$FUNCTION_STOP_VALHEIM_SERVER_SERVICE_STOPPING"
     sudo systemctl stop valheimserver.service
     echo ""
     else
-    echo "Canceling Stopping of Valheim Server Service - because Loki sucks"
+    echo "$FUNCTION_STOP_VALHEIM_SERVER_SERVICE_CANCEL"
     sleep 3
     clear
 fi
@@ -696,23 +696,23 @@ function start_valheim_server() {
     clear
     echo ""
     echo -ne "
-$(ColorOrange '-------------------Start Valheim Server---------------------')
-$(ColorRed '------------------------------------------------------------')"
+$(ColorOrange ''"$FUNCTION_START_VALHEIM_SERVER_SERVICE_HEADER"'')
+$(ColorRed ''"$DRAW60"'')"
 echo ""
-tput setaf 2; echo "You are about to START the Valheim Server" ; tput setaf 9;
-tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9;
+tput setaf 2; echo "$FUNCTION_START_VALHEIM_SERVER_SERVICE_INFO" ; tput setaf 9;
+tput setaf 2; echo "$FUNCTION_START_VALHEIM_SERVER_SERVICE_INFO_1" ; tput setaf 9;
 echo -ne "
-$(ColorRed '------------------------------------------------------------')"
+$(ColorRed ''"$DRAW60"'')"
 echo ""
- read -p "Please confirm:" confirmStart
+ read -p "$PLEASE_CONFIRM" confirmStart
 #if y, then continue, else cancel
         if [ "$confirmStart" == "y" ]; then
     echo ""
-    tput setaf 2; echo "Starting Valheim Server with Thor's Hammer!!!!" ; tput setaf 9;
+    tput setaf 2; echo "$FUNCTION_START_VALHEIM_SERVER_SERVICE_START" ; tput setaf 9;
     sudo systemctl start valheimserver.service
     echo ""
     else
-        echo "Canceling Starting of Valheim Server Service - because Loki sucks"
+        echo "$FUNCTION_START_VALHEIM_SERVER_SERVICE_CANCEL"
         sleep 3
     clear
 fi
@@ -724,22 +724,22 @@ function restart_valheim_server() {
     clear
     echo ""
     echo -ne "
-$(ColorOrange '------------------Restart Valheim Server--------------------')
-$(ColorRed '------------------------------------------------------------')"
+$(ColorOrange ''"$FUNCTION_RESTART_VALHEIM_SERVICE_SERVICE_HEADER"'')
+$(ColorRed ''"$DRAW60"'')"
 echo ""
-tput setaf 2; echo "You are about to RESTART the Valheim Server" ; tput setaf 9; 
-tput setaf 2; echo "You are you sure y(YES) or n(NO)?" ; tput setaf 9; 
+tput setaf 2; echo "$FUNCTION_RESTART_VALHEIM_SERVICE_SERVICE_INFO" ; tput setaf 9; 
+tput setaf 2; echo "$FUNCTION_RESTART_VALHEIM_SERVICE_SERVICE_INF0_1" ; tput setaf 9; 
 echo -ne "
-$(ColorRed '------------------------------------------------------------')"
+$(ColorRed ''"$DRAW60"'')"
 echo ""
- read -p "Please confirm:" confirmRestart
+ read -p "$PLEASE_CONFIRM" confirmRestart
 #if y, then continue, else cancel
         if [ "$confirmRestart" == "y" ]; then
-tput setaf 2; echo "Restarting Valheim Server with Thor's Hammer!!!!" ; tput setaf 9; 
+tput setaf 2; echo "$FUNCTION_RESTART_VALHEIM_SERVICE_SERVICE_RESTART" ; tput setaf 9; 
     sudo systemctl restart valheimserver.service
     echo ""
     else
-        echo "Canceling Restarting of Valheim Server Service - because Loki sucks"
+        echo "$FUNCTION_RESTART_VALHEIM_SERVICE_SERVICE_CANCEL"
         sleep 3
     clear
 fi
