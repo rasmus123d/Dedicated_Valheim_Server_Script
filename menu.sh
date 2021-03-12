@@ -1017,7 +1017,7 @@ function change_default_server_port() {
     tput setaf 1; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_INFO_3" ; tput setaf 9;
     tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     tput setaf 2; echo "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_CURRENT ${currentPort} " ; tput setaf 9;
-    tput setaf 2; echo $DRAW60" ; tput setaf 9;
+    tput setaf 2; echo "$DRAW60" ; tput setaf 9;
     echo ""
     while true; do
         read -p "$FUNCTION_CHANGE_DEFAULT_SERVER_PORT_EDIT_PORT " setCurrentPort
@@ -1107,48 +1107,15 @@ function write_public_off_config_and_restart() {
     write_config_and_restart
 }
 
-
-
-
 function display_full_config() {
     get_current_config
     print_current_config
 }
-function admin_valheim_config_edit(){
-echo ""
-menu_header
-echo -ne "
-$(ColorOrange '------------Change Valheim Startup Config File--------------')
-$(ColorOrange '-')$(ColorGreen ' 1)') Display Current Start Vahleim Config
-$(ColorOrange '-')$(ColorGreen ' 2)') Change Public Display Name
-$(ColorOrange '-')$(ColorGreen ' 3)') Change Default Server Port
-$(ColorOrange '-')$(ColorGreen ' 4)') Change Local World Name
-$(ColorOrange '-')$(ColorGreen ' 5)') Change Server Access Password
-$(ColorOrange '------------------------------------------------------------')
-$(ColorOrange '-')$(ColorGreen ' 6)') Enable Public Listing (Restarts Valheim without asking)
-$(ColorOrange '-')$(ColorGreen ' 7)') Disable Public Listing (Restarts Valehim without asking)
-$(ColorOrange '------------------------------------------------------------')
-$(ColorOrange '-')$(ColorGreen ' 0)') Go to Admin Tools Menu
-$(ColorOrange '-')$(ColorGreen ' 00)') Go to Main Menu
-$(ColorOrange '------------------------------------------------------------')
-$(ColorPurple 'Choose an option:') "
-        read a
-        case $a in
-		1) display_full_config ; admin_valheim_config_edit ;; 
-	        2) change_public_display_name ; admin_valheim_config_edit ;; 
-		3) change_default_server_port ; admin_valheim_config_edit ;;
-	        4) change_local_world_name ; admin_valheim_config_edit ;;
-		5) change_server_access_password ; admin_valheim_config_edit ;;
-		6) write_public_on_config_and_restart ; admin_valheim_config_edit ;;
-		7) write_public_off_config_and_restart ; admin_valheim_config_edit ;;
-		  0) admin_tools_menu ; admin_tools_menu ;;
-		  00) menu ; menu ;;
-		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; tech_support ;;
-        esac
-}
+
 ########################################################################
 ####################END CHANGE VALHEIM START CONFIG#####################
 ########################################################################
+
 ########################################################################
 ##########################MENUS STATUS VARIBLES#########################
 ########################################################################
@@ -1159,7 +1126,7 @@ function check_official_valheim_release_build() {
     currentOfficialRepo=$(/home/steam/steamcmd +login anonymous +app_info_update 1 +app_info_print 896660 +quit | grep -A10 branches | grep -A2 public | grep buildid | cut -d'"' -f4) 
         echo $currentOfficialRepo
     else 
-        echo "No Data";
+        echo "$NO_DATA";
   fi
 }
 
@@ -1170,7 +1137,7 @@ localValheimAppmanifest=${valheimInstallPath}/steamapps/appmanifest_896660.acf
     localValheimBuild=$(grep buildid ${localValheimAppmanifest} | cut -d'"' -f4)
         echo $localValheimBuild
     else 
-        echo "No Data";
+        echo "$NO_DATA";
   fi
 }
 
@@ -1183,26 +1150,26 @@ echo $latestScript
 function display_public_status_on_or_off() {
 currentPortCheck=$(perl -n -e '/\-public "?([^"]+)"?$/ && print "$1\n"' ${valheimInstallPath}/start_valheim.sh)
     if [[ $currentPortCheck == 1 ]]; then 
-      echo "On"
+      echo "$ECHO_ON"
     else
-      echo "Off"
+      echo "$ECHO_OFF"
   fi
 }
 
 
 function display_public_IP() {
 externalip=$(curl -s ipecho.net/plain;echo)
-echo -e '\E[32m'"External IP : $whateverzerowantstocalthis "$externalip ; tput setaf 9;
+echo -e '\E[32m'"$EXTERNAL_IP $whateverzerowantstocalthis "$externalip ; tput setaf 9;
 }
 
 function display_local_IP() {
 internalip=$(hostname -I)
-echo -e '\E[32m'"Internal IP :" $mymommyboughtmeaputerforchristmas $internalip ; tput setaf 9;
+echo -e '\E[32m'"$INTERNAL_IP $mymommyboughtmeaputerforchristmas "$internalip ; tput setaf 9;
 
 }
 
 function are_you_connected() {
-ping -c 1 google.com &> /dev/null && echo -e '\E[32m'"Internet: $tecreset Connected" || echo -e '\E[32m'"Internet: $tecreset Disconnected"
+ping -c 1 google.com &> /dev/null && echo -e '\E[32m'"$INTERNET_MSG $tecreset $INTERNET_MSG_CONNECTED" || echo -e '\E[32m'"$INTERNET_MSG $tecreset $INTERNET_MSG_DISCONNECTED"
 
 }
 
@@ -1212,27 +1179,27 @@ echo -ne "
 $(ColorOrange '╔═══════════════════════════════════════════════╗')
 $(ColorOrange '║~~~~~~~~~~~~~~~~~~-Njord Menu-~~~~~~~~~~~~~~~~~║')
 $(ColorOrange '╠═══════════════════════════════════════════════╝')
-$(ColorOrange '║ Welcome Viking! Do not forget about your bees') ${enHeaderMenuWelcome}
-$(ColorOrange '║ Visit our discord: https://discord.gg/ejgQUfc')
-$(ColorOrange '║ Beware Loki hides within this script')
+$(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO"'') ${enHeaderMenuWelcome}
+$(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_1"'')
+$(ColorOrange '║ '"$FUNCTION_HEADER_MENU_INFO_2"'')
 $(ColorOrange '║') 
-$(ColorOrange '║') Valheim Official Build:" $(check_official_valheim_release_build)
+$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_VALHEIM_OFFICIAL_BUILD"'" $(check_official_valheim_release_build)
 echo -ne "
-$(ColorOrange '║') Valheim Server Build:" $(check_local_valheim_build)
+$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_VALHEIM_LOCAL_BUILD"' " $(check_local_valheim_build)
 echo -ne "
-$(ColorOrange '║') Server Name: ${currentDisplayName}
+$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_SERVER_NAME"' ${currentDisplayName}
 $(ColorOrange '║') $(are_you_connected)
 $(ColorOrange '║')" $(display_public_IP)
 echo -ne "
 $(ColorOrange '║')" $(display_local_IP)
 echo -ne "
-$(ColorOrange '║') Your Server Port:" ${currentPort}
+$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_SERVER_PORT"' " ${currentPort}
 echo -ne "
-$(ColorOrange '║') Public Listing:" $(display_public_status_on_or_off)
+$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_PUBLIC_LIST"' " $(display_public_status_on_or_off)
 echo -ne "
-$(ColorOrange '║') Current Menu Release: $(check_menu_script_repo)
-$(ColorOrange '║') Local Installed Menu: ${mversion}
-$(ColorOrange '║') Happy Gaming - ZeroBandwidth
+$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_CURRENT_NJORD_RELEASE"' $(check_menu_script_repo)
+$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_LOCAL_NJORD_VERSION"' ${mversion}
+$(ColorOrange '║') '"$FUNCTION_HEADER_MENU_INFO_GG_ZEROBANDWIDTH"'
 $(ColorOrange '╚═══════════════════════════════════════════════')"
 }
 
@@ -1240,12 +1207,11 @@ $(ColorOrange '╚════════════════════�
 #######################Display Main Menu System#########################
 ########################################################################
 menu(){
-#get_current_config
 clear
 menu_header
 echo -ne "
 $(ColorOrange '-------------Check for Script Updates-----------')
-$(ColorOrange '-')$(ColorGreen ' 1)') Update Menu Script from GitHub
+$(ColorOrange '-')$(ColorGreen ' 1)') Update Njord Menu from GitHub
 $(ColorOrange '--------------Valheim Server Commands-----------')
 $(ColorOrange '-')$(ColorGreen ' 2)') Server Admin Tools 
 $(ColorOrange '-')$(ColorGreen ' 3)') Tech Support Tools
@@ -1253,7 +1219,13 @@ $(ColorOrange '-')$(ColorGreen ' 4)') Install Valheim Server
 $(ColorOrange '---------Official Valheim Server Update---------')
 $(ColorOrange '-')$(ColorGreen ' 5)') Check and Apply Valheim Server Update
 $(ColorOrange '-----Edit start_valehim.sh Configuration--------')
-$(ColorOrange '-')$(ColorGreen ' 6)') Display or Edit Valheim Config File
+$(ColorOrange '-')$(ColorGreen ' 6)') Display Current Start Vahleim Config
+$(ColorOrange '-')$(ColorGreen ' 7)') Change Public Display Name
+$(ColorOrange '-')$(ColorGreen ' 8)') Change Default Server Port
+$(ColorOrange '-')$(ColorGreen ' 9)') Change Local World Name
+$(ColorOrange '-')$(ColorGreen ' 10)') Change Server Access Password
+$(ColorOrange '-')$(ColorGreen ' 11)') Enable Public Listing (Restarts Valheim without asking)
+$(ColorOrange '-')$(ColorGreen ' 12)') Disable Public Listing (Restarts Valehim without asking)
 $(ColorOrange '-----------------You want Mods?-----------------')
 $(ColorOrange '-')$(ColorGreen '') You must use the advance menu launcher
 $(ColorOrange '------------------------------------------------')
@@ -1267,8 +1239,16 @@ $(ColorPurple 'Choose an option:') "
 		3) tech_support ; menu ;;
 		4) server_install_menu ; menu ;;
 		5) confirm_check_apply_server_updates ; menu ;;	
-	        6) admin_valheim_config_edit ; menu ;;
-		    0) exit 0 ;;
+	        6) display_full_config ; menu ;;
+	        7) change_public_display_name ; menu ;;
+	        8) change_default_server_port ; menu ;;		
+	        9) change_local_world_name ; menu ;;
+	        10) change_server_access_password ; menu ;;
+		11) write_public_on_config_and_restar ; menu ;;
+		12) write_public_off_config_and_restart ; menu ;;
+		13) backup_world_data ; menu ;;
+		14) restore_world_data ; menu ;;
+                   0) exit 0 ;;
 		    *)  echo -ne " $(ColorRed 'Wrong option.')" ; menu ;;
         esac
 }
